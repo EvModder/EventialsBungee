@@ -1,0 +1,78 @@
+# EventialsBungee config file
+
+# TODO: Cross-server mail, 
+
+#--------------------------------------#
+#            Miscellaneous             #
+#--------------------------------------#
+rejoin-last-server: true
+global-join-message: true #Perm: evbungee.silentjoin
+global-quit-message: true #Perm: evbungee.silentquit
+mail-server-name: '@Console,console,server'
+mail-admin-name: '@Admin,admin,owner'
+mail-all-name: '@a,all,everyone'
+
+#--------------------------------------#
+#             Mail System              #
+#--------------------------------------#
+enable-command-mail: true
+command-mail: ['newmail', 'mailbox']
+mail-read-aliases: ['read', 'inbox', 'received'], 'in', 'r'] #or /mail read
+mail-sent-aliases: ['sent', 'outgoing', 'out']
+mail-send-aliases: ['send', 'to', 's'] #or /mail <name> <msg>
+
+#--------------------------------------#
+#           Utility Commands           #
+#--------------------------------------#
+enable-command-teleport: true
+command-teleport: ['tp-server', 'server-tp', 'tpserver']
+
+server-aliases:
+   Alternate: ['alt','altc','altcraft','alternatecraft','old','oldworld','flat','flatlands']
+   NewWorld: ['new','mysterypeaks','newland']
+   Torncraft: ['tc','torn']
+   Testcraft: ['test']
+   MosherMiners: ['mosh','moshpit']
+
+#--------------------------------------#
+#          PingManager config          #
+#--------------------------------------#
+custom-ping: true
+
+# Use SUM for sum of players across all servers
+# Use SERVER to only show count for current server
+# Example:
+# max-player-count: 'sum * 2', online-player-count: 'sum - server'
+max-player-count: '25'
+online-player-count: 'sum'
+hover-message: |
+   This is a test &9lol
+   Please do not panic
+   &7I &llike&f fries!
+
+
+
+
+
+
+#--------------------------------------#
+#       BungeeChat config UNUSED       #
+#--------------------------------------#
+# you can add custom regular expressions here
+regex:
+# make any pasted links clickable for convenience
+    - search: '(?<link>(?:(https?)://)?([-\w_\.]{2,}\.[a-z]{2,4})(/\S*)?)'
+      replace: "[url]${link}[/url]"
+# shows link target in tooltip for security reasons (only if link target differs from shown text)
+    - search: '(?i)\[(?:url|command)=(?<cmd>(?:(?:[^]\[]*)\[(?:[^]\[]*)\])*(?:[^]\[]*))\]'
+      replace: "[hover=&b${cmd}]$0"
+    - search: '(?i)\[/(?:url|command)\]'
+      replace: "$0[/hover]"
+# if players write commands in chat like ./command, make them clickable + remove the dot
+    - search: '(?i)^\.(?<cmd>/.{2,})'
+      replace: "[suggest]${cmd}[/suggest]"
+# underline clickable things
+    - search: '(?i)(?=(\[(?:url|command|suggest)(?:=(?<cmd>(?:(?:[^]\[]*)\[(?:[^]\[]*)\])*(?:[^]\[]*)))?\]))'
+      replace: "[u]"
+    - search: '(?i)\[/(?:url|command|suggest)\]'
+      replace: "$0[/u]"
