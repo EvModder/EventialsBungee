@@ -1,7 +1,8 @@
-package Eventials;
+package Mail;
 import java.util.Collection;
 import java.util.Vector;
 import EvLib.FileIO;
+import Eventials.EventialsBungee;
 
 public class UserMailbox{
 	final String uuid;

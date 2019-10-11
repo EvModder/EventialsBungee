@@ -2,20 +2,14 @@ package Eventials.commands;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 import EvLib.EvBungeeCommand;
 import Eventials.EventialsBungee;
-import Eventials.MailUtils;
+import Mail.MailUtils;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.api.plugin.Command;
-import net.md_5.bungee.api.plugin.TabExecutor;
-import net.md_5.bungee.util.CaseInsensitiveMap;
 
 public class CommandMail extends EvBungeeCommand{
 	final EventialsBungee plugin;
@@ -26,16 +20,14 @@ public class CommandMail extends EvBungeeCommand{
 		super(name, permission, aliases);
 		plugin = EventialsBungee.getPlugin();
 		mailer = new MailUtils(plugin);
-		addSubCommand(new CommandBase("server", "eventials.mail.admin", this::commandReload));
-		addSubCommand(new CommandHide());
-		addSubCommand(new CommandFakePlayers());
-		addSubCommand(new CommandBase("status", null, this::commandStatus));
+		//read/sent, send, unsend/delete/clear, help
+//		addSubCommand(new CommandBase("server", "eventials.mail.admin", this::commandReload));
+//		addSubCommand(new CommandHide());
+//		addSubCommand(new CommandFakePlayers());
+//		addSubCommand(new CommandBase("status", null, this::commandStatus));
 		addSubCommand(new CommandBase("help", null, this::commandHelp, "?"));
 		List<String> readAliases = plugin.getConfig().getStringList("mail-read-aliases");
-		addSubCommand(new EvBungeeCommand("read", null, readAliases.toArray(new String[readAliases.size()])){
-			@Override
-			public Iterable<String> onTabComplete(CommandSender sender, String[] args){
-		});
+		addSubCommand(new CommandMailRead("read", null, readAliases.toArray(new String[readAliases.size()])));
 		addSubCommand(new CommandBase("read", null, this::commandReadMail,
 				readAliases.toArray(new String[readAliases.size()])));
 		setDefaultAction(this::commandHelp);
@@ -53,21 +45,6 @@ public class CommandMail extends EvBungeeCommand{
 	}
 
 	@Override
-	public Iterable<String> onTabComplete(CommandSender sender, String[] args){
-		if(args.length == 1) {
-			return subCommands.keySet().stream().filter(cmd -> cmd.startsWith(args[0])).collect(Collectors.toList());
-		}
-		else if(args.length > 1) {
-			Command command = subCommands.get(args[0]);
-			if(command != null && command instanceof TabExecutor) {
-				if(command.getPermission() == null || sender.hasPermission(command.getPermission())) {
-					((TabExecutor)command).onTabComplete(sender, Arrays.copyOfRange(args, 1, args.length));
-				}
-			}
-		}
-		return Collections.emptyList();
-	}
-
 	public void execute(CommandSender sender, String[] args){
 		sender.sendMessage(new TextComponent(ChatColor.GRAY
 				+"This command has not been fully implemented yet\nIn the meantime, use /email"));

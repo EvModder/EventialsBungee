@@ -1,4 +1,4 @@
-package Eventials;
+package Mail;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -7,6 +7,7 @@ import java.util.Vector;
 import java.util.UUID;
 import java.util.logging.Logger;
 import EvLib.UUIDLookupUtil;
+import Eventials.EventialsBungee;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -14,7 +15,7 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 public class MailUtils{
 	final Logger logger;
-	final UUIDLookupUtil uuidFinder;
+//	final UUIDLookupUtil uuidFinder;
 //	final Has hMap<String, UserMails> onlineUsers;//TODO: this might be nice
 	final public String[] CONSOLE_NAME, ADMIN_NAME, ALL_NAME;
 //	final HashSet<String> ADMIN_NAMES;//TODO: populate
@@ -23,7 +24,7 @@ public class MailUtils{
 
 	public MailUtils(EventialsBungee pl){
 		logger = pl.getLogger();
-		uuidFinder = UUIDLookupUtil.getInstance();
+//		uuidFinder = UUIDLookupUtil.getInstance();
 //		onlineUsers = new HashMap<String, UserMails>();
 
 		CONSOLE_NAME = pl.getConfig().getString("mail-server-name", "@Console,console,@Server,Server").split(",");
@@ -139,7 +140,7 @@ public class MailUtils{
 		}
 		String from = getMailName(sender);
 		long timestamp = System.currentTimeMillis();
-		for(String to : targets) sendMail(new Mail(SOME_TODO_UNIQUE_ID, from, to, timestamp, message));
+//		for(String to : targets) sendMail(new Mail(SOME_TODO_UNIQUE_ID, from, to, timestamp, message));
 	}
 
 	/**
@@ -151,12 +152,12 @@ public class MailUtils{
 	 * @param mail      the {@code Mail} to be sent
 	 */
 	public void sendMail(Mail mail){
-		UserMailbox fromUser = UserMailbox.loadUserMail(mail.from);
-		UserMailbox toUser = UserMailbox.loadUserMail(mail.to);
-		fromUser.to.add(mail);
-		toUser.from.add(mail);
-		UserMailbox.saveUserMail(fromUser);
-		UserMailbox.saveUserMail(toUser);
+//		UserMailbox fromUser = UserMailbox.loadUserMail(mail.from);
+//		UserMailbox toUser = UserMailbox.loadUserMail(mail.to);
+//		fromUser.to.add(mail);
+//		toUser.from.add(mail);
+//		UserMailbox.saveUserMail(fromUser);
+//		UserMailbox.saveUserMail(toUser);
 	}
 
 	public void clearInbox(CommandSender sender, String targets, boolean clearSent){
@@ -225,8 +226,8 @@ public class MailUtils{
 
 			try{targets.add(UUID.fromString(str).toString());}
 			catch(IllegalArgumentException ex){
-				UUID uuid = uuidFinder.getUUID(str);
-				if(uuid != null) targets.add(uuid.toString());
+//				UUID uuid = uuidFinder.getUUID(str);
+//				if(uuid != null) targets.add(uuid.toString());
 				//TODO: else{ problem }
 			}
 		}

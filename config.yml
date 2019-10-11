@@ -20,6 +20,12 @@ command-mail: ['newmail', 'mailbox']
 mail-read-aliases: ['read', 'inbox', 'received'], 'in', 'r'] #or /mail read
 mail-sent-aliases: ['sent', 'outgoing', 'out']
 mail-send-aliases: ['send', 'to', 's'] #or /mail <name> <msg>
+#Permissions:
+#eventials.mail.send
+#eventials.mail.unsend
+#eventials.mail.block, eventials.mail.block.admin, eventials.mail.block.server, eventials.mail.block.proxy
+#eventials.mail.to.admin, eventials.mail.to.server, eventials.mail.to.proxy
+#eventials.mail.as.admin, eventials.mail.as.server, eventials.mail.as.proxy, eventials.mail.as.player
 
 #--------------------------------------#
 #           Utility Commands           #
@@ -28,10 +34,11 @@ enable-command-teleport: true
 command-teleport: ['tp-server', 'server-tp', 'tpserver']
 
 server-aliases:
-   Alternate: ['alt','altc','altcraft','alternatecraft','old','oldworld','flat','flatlands']
-   NewWorld: ['new','mysterypeaks','newland']
+   Alternate: ['alt','altc','altcraft','alternatecraft','old','oldw','oldworld','flat','flatlands']
+   NewWorld: ['new','neww','mysterypeaks','newland']
    Torncraft: ['tc','torn']
    Testcraft: ['test']
+   Hardcore: ['hc','hard','hardc']
    MosherMiners: ['mosh','moshpit']
 
 #--------------------------------------#

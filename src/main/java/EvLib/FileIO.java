@@ -115,9 +115,6 @@ public class FileIO{
 	}
 
 	public static boolean saveFile(String filename, String content){
-		return saveFile(filename, content, false);
-	}
-	public static boolean saveFile(String filename, String content, boolean genDirs){
 		try{
 			BufferedWriter writer = new BufferedWriter(new FileWriter(DIR + filename));
 			writer.write(content);
@@ -128,7 +125,18 @@ public class FileIO{
 			return false;
 		}
 	}
-
+	public static boolean appendFile(String filename, String content){
+		try{
+			BufferedWriter writer = new BufferedWriter(new FileWriter(DIR + filename, true));
+			writer.write(content);
+			writer.close();
+			return true;
+		}
+		catch(IOException e){
+			return false;
+		}
+	}
+	
 	public static String loadResource(Object pl, String filename){
 		try{
 			BufferedReader reader = new BufferedReader(new InputStreamReader(pl.getClass().getResourceAsStream("/" + filename)));

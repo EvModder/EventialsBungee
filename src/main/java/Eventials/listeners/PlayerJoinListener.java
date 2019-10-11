@@ -14,7 +14,6 @@ public class PlayerJoinListener implements Listener {
 	UUIDLookupUtil uuidFinder;
 	public PlayerJoinListener(){
 		plugin = EventialsBungee.getPlugin();
-		uuidFinder = UUIDLookupUtil.getInstance();
 	}
 
 	@EventHandler
@@ -29,6 +28,5 @@ public class PlayerJoinListener implements Listener {
 				}
 			}
 		}
-		uuidFinder.cacheUUID(evt.getPlayer().getName(), evt.getPlayer().getUniqueId());
 	}
 }

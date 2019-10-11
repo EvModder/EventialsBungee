@@ -11,19 +11,16 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class UUIDLookupUtil{
-	private static UUIDLookupUtil instance; public static UUIDLookupUtil getInstance(){
-		if(instance == null) instance = new UUIDLookupUtil();
-		return instance;
-	}
-	final String mojangLookupURL = "https://api.mojang.com/users/profiles/minecraft/";
-	final ConcurrentHashMap<String, UUID> uuidFinder = new ConcurrentHashMap<String, UUID>();
+	static final String mojangLookupURL = "https://api.mojang.com/users/profiles/minecraft/";
+	static final ConcurrentHashMap<String, UUID> uuidFinder = new ConcurrentHashMap<String, UUID>();
 
 	UUIDLookupUtil(){
 		//TODO: Load cache
 	}
 
-	public UUID lookupUUID(String name, boolean original){
+	static public UUID lookupUUID(String name, boolean original){
 		try{
+			//TODO: return properly capitalized name as well as UUID
 			String uuid = (((JsonObject) new JsonParser().parse(
 					new BufferedReader(new InputStreamReader(
 						new URL(mojangLookupURL + name + (original ? "?at=0" : "")).openStream(), "UTF-8")))
@@ -49,16 +46,16 @@ public class UUIDLookupUtil{
 		return null;
 	}
 
-	public UUID getUUID(String name){
+	static public UUID getUUID(String name){
 		UUID uuid = uuidFinder.get(name.toLowerCase());
 		if(uuid != null) return uuid;
 		uuid = lookupUUID(name, false);
-		if(uuid == null) uuid = lookupUUID(name, true);
+		if(uuid == null) uuid = lookupUUID(name, false);
 		if(uuid != null) uuidFinder.put(name.toLowerCase(), uuid);
 		return uuid;
 	}
 
-	public void cacheUUID(String name, UUID uuid){
+	static public void cacheUUID(String name, UUID uuid){
 		uuidFinder.put(name.toLowerCase(), uuid);
 	}
 }
