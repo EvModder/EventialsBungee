@@ -30,11 +30,11 @@ public class EventialsBungee extends EvBungeePlugin {
 			getProxy().getPluginManager().registerCommand(this, new CommandTeleport(command.remove(0), 
 					"eventials.teleport", command.toArray(new String[command.size()])));
 		}
-		if(config.getBoolean("enable-command-mail")){
+		/*if(config.getBoolean("enable-command-mail")){
 			List<String> command = config.getStringList("command-mail");
 			getProxy().getPluginManager().registerCommand(this, new CommandMail(command.remove(0), 
 					"eventials.mail", command.toArray(new String[command.size()])));
-		}
+		}*/
 		if(config.contains("server-aliases")){
 			Configuration serverAliases = config.getSection("server-aliases");
 			for(final String serverName : serverAliases.getKeys()){
