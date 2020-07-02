@@ -17,7 +17,7 @@ mail-all-name: '@a,all,everyone'
 #--------------------------------------#
 enable-command-mail: true
 command-mail: ['newmail', 'mailbox']
-mail-read-aliases: ['read', 'inbox', 'received'], 'in', 'r'] #or /mail read
+mail-read-aliases: ['read', 'inbox', 'received', 'in', 'r'] #or /mail read
 mail-sent-aliases: ['sent', 'outgoing', 'out']
 mail-send-aliases: ['send', 'to', 's'] #or /mail <name> <msg>
 #Permissions:
