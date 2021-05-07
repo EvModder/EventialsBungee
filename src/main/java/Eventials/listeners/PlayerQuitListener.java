@@ -10,12 +10,12 @@ import net.md_5.bungee.event.EventHandler;
 public class PlayerQuitListener implements Listener {
 	EventialsBungee plugin;
 	boolean rejoinLastServer;
-	
+
 	public PlayerQuitListener(){
 		plugin = EventialsBungee.getPlugin();
 		rejoinLastServer = plugin.getConfig().getBoolean("rejoin-last-server", true);
 	}
-	
+
 	@EventHandler
 	public void onPlayerQuit(PlayerDisconnectEvent evt) {
 		if(!evt.getPlayer().hasPermission("evbungee.silentquit")){
