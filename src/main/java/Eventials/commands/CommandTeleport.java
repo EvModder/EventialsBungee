@@ -1,15 +1,11 @@
 package Eventials.commands;
 
-import java.util.Arrays;
 import Eventials.EventialsBungee;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
-import net.md_5.bungee.api.event.TabCompleteEvent;
 import net.md_5.bungee.api.plugin.Command;
-import net.md_5.bungee.api.plugin.Listener;
-import net.md_5.bungee.event.EventHandler;
 
 public class CommandTeleport extends Command {
 	EventialsBungee plugin;
@@ -17,11 +13,11 @@ public class CommandTeleport extends Command {
 	public CommandTeleport(String name, String permission, String[] aliases) {
 		super(name, permission, aliases);
 		plugin = EventialsBungee.getPlugin();
-		plugin.getProxy().getPluginManager().registerListener(plugin, new Listener(){
-			@EventHandler public void onTabCompleteEvent(TabCompleteEvent evt){
-				evt.getSuggestions().removeAll(Arrays.asList(aliases));
-			}
-		});
+//		plugin.getProxy().getPluginManager().registerListener(plugin, new Listexner(){
+//			@EventHandler public void onTabCompleteEvent(TabCompleteEvent evt){
+//				evt.getSuggestions().removeAll(Arrays.asList(aliases));
+//			}
+//		});
 	}
 
 	@Override

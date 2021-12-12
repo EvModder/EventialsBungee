@@ -34,12 +34,12 @@ enable-command-teleport: true
 command-teleport: ['tp-server', 'server-tp', 'tpserver']
 
 server-aliases:
-   Alternate: ['alt','altc','altcraft','alternatecraft','old','oldw','oldworld','flat','flatlands']
-   NewWorld: ['new','neww','mysterypeaks','newland']
-   Torncraft: ['tc','torn']
-   Testcraft: ['test']
-   Hardcore: ['hc','hard','hardc']
-   MosherMiners: ['mosh','moshpit']
+#   Alternate: ['alt','altc','altcraft','alternatecraft','old','oldw','oldworld','flat','flatlands']
+#   NewWorld: ['new','neww','mysterypeaks','newland']
+#   Torncraft: ['tc','torn']
+#   Testcraft: ['test']
+#   Hardcore: ['hc','hard','hardc']
+#   MosherMiners: ['mosh','moshpit']
 
 #--------------------------------------#
 #          PingManager config          #
