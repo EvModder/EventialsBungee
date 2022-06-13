@@ -24,6 +24,14 @@ public class EventialsBungee extends EvBungeePlugin {
 			getProxy().getPluginManager().registerListener(this, new PlayerJoinListener());
 		if(config.getBoolean("global-quit-message"))
 			getProxy().getPluginManager().registerListener(this, new PlayerQuitListener());
+		
+		if(!config.getStringList("hide-tab-complete-commands-for-default").isEmpty()){
+			try{
+				Class.forName("io.github.waterfallmc.waterfall.event.ProxyDefineCommandsEvent");
+				getProxy().getPluginManager().registerListener(this, new ProxySendCommandsListener());
+			}
+			catch(ClassNotFoundException e){}
+		}
 
 		//Commands
 		if(config.getBoolean("enable-command-teleport")){

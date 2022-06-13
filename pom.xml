@@ -13,6 +13,10 @@
             <id>bungeecord-repo</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </repository>
+        <repository>
+            <id>papermc</id>
+            <url>https://papermc.io/repo/repository/maven-public/</url>
+        </repository>
     </repositories>
 
     <build>
@@ -32,8 +36,8 @@
     <dependencies>
         <dependency>
             <groupId>org.apache.commons</groupId>
-           	<artifactId>commons-jexl3</artifactId>
-        	   <version>3.1</version>
+            <artifactId>commons-jexl3</artifactId>
+            <version>3.1</version>
         </dependency>
         <dependency>
             <groupId>net.md-5</groupId>
@@ -47,6 +51,12 @@
             <artifactId>bungeecord-api</artifactId>
             <version>1.12-SNAPSHOT</version>
             <type>javadoc</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.github.waterfallmc</groupId>
+            <artifactId>waterfall-api</artifactId>
+            <version>1.16-R0.4-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

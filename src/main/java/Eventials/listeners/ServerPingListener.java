@@ -35,7 +35,7 @@ public class ServerPingListener implements Listener{
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onProxyPing(ProxyPingEvent evt){
 		if(evt.getResponse() != null && evt.getResponse().getPlayers() != null){
-			plugin.getLogger().info("PingedProxy");
+			//plugin.getLogger().info("PingedProxy");
 			//plugin.getLogger().info("Description: "+evt.getResponse().getDescription());
 			//plugin.getLogger().info("Players: "+evt.getResponse().getPlayers().getOnline());
 			evt.getResponse().getPlayers().setOnline(plugin.getProxy().getOnlineCount());
