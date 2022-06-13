@@ -11,11 +11,14 @@ global-quit-message: true #Perm: evbungee.silentquit
 mail-server-name: '@Console,console,server'
 mail-admin-name: '@Admin,admin,owner'
 mail-all-name: '@a,all,everyone'
+hide-tab-complete-commands-for-default:
+- bungee
+- perms
 
 #--------------------------------------#
 #             Mail System              #
 #--------------------------------------#
-enable-command-mail: true
+enable-command-mail: false
 command-mail: ['newmail', 'mailbox']
 mail-read-aliases: ['read', 'inbox', 'received', 'in', 'r'] #or /mail read
 mail-sent-aliases: ['sent', 'outgoing', 'out']
@@ -30,10 +33,10 @@ mail-send-aliases: ['send', 'to', 's'] #or /mail <name> <msg>
 #--------------------------------------#
 #           Utility Commands           #
 #--------------------------------------#
-enable-command-teleport: true
+enable-command-teleport: false
 command-teleport: ['tp-server', 'server-tp', 'tpserver']
 
-server-aliases:
+#server-aliases:
 #   Alternate: ['alt','altc','altcraft','alternatecraft','old','oldw','oldworld','flat','flatlands']
 #   NewWorld: ['new','neww','mysterypeaks','newland']
 #   Torncraft: ['tc','torn']
@@ -56,30 +59,3 @@ hover-message: |
    This is a test &9lol
    Please do not panic
    &7I &llike&f fries!
-
-
-
-
-
-
-#--------------------------------------#
-#       BungeeChat config UNUSED       #
-#--------------------------------------#
-# you can add custom regular expressions here
-regex:
-# make any pasted links clickable for convenience
-    - search: '(?<link>(?:(https?)://)?([-\w_\.]{2,}\.[a-z]{2,4})(/\S*)?)'
-      replace: "[url]${link}[/url]"
-# shows link target in tooltip for security reasons (only if link target differs from shown text)
-    - search: '(?i)\[(?:url|command)=(?<cmd>(?:(?:[^]\[]*)\[(?:[^]\[]*)\])*(?:[^]\[]*))\]'
-      replace: "[hover=&b${cmd}]$0"
-    - search: '(?i)\[/(?:url|command)\]'
-      replace: "$0[/hover]"
-# if players write commands in chat like ./command, make them clickable + remove the dot
-    - search: '(?i)^\.(?<cmd>/.{2,})'
-      replace: "[suggest]${cmd}[/suggest]"
-# underline clickable things
-    - search: '(?i)(?=(\[(?:url|command|suggest)(?:=(?<cmd>(?:(?:[^]\[]*)\[(?:[^]\[]*)\])*(?:[^]\[]*)))?\]))'
-      replace: "[u]"
-    - search: '(?i)\[/(?:url|command|suggest)\]'
-      replace: "$0[/u]"
