@@ -20,6 +20,7 @@ public class BBCodeChatParser implements ChatParser {
 			"citValue>.*?)\\[/\\k<implicitTag>\\]))"
 	);
 
+	@SuppressWarnings("deprecation")
 	public BaseComponent[] parse(String text) {
 		Matcher matcher = pattern.matcher(text);
 		TextComponent current = new TextComponent();
@@ -43,36 +44,29 @@ public class BBCodeChatParser implements ChatParser {
 			String group_implicitTag = matcher.group("implicitTag");
 			String group_implicitValue = matcher.group("implicitValue");
 			if(group_color != null && nocolorLevel <= 0) {
-				ChatColor color = ChatColor.getByChar(group_color.charAt(0));
-				if(color != null) {
-					switch(color) {
-					case MAGIC: // '\001'
-					current.setObfuscated(true);
-					break;
-
-					case BOLD: // '\002'
-					current.setBold(true);
-					break;
-
-					case STRIKETHROUGH: // '\003'
-					current.setStrikethrough(true);
-					break;
-
-					case UNDERLINE: // '\004'
-					current.setUnderlined(true);
-					break;
-
-					case ITALIC: // '\005'
-					current.setItalic(true);
-					break;
-
-					case RESET: // '\006'
-					color = ChatColor.WHITE;
-					// fall through
-
+				char color = group_color.charAt(0);
+				switch(group_color.charAt(0)) {
+					case 'k': // '\001'
+						current.setObfuscated(true);
+						break;
+					case 'l': // '\002'
+						current.setBold(true);
+						break;
+					case 'n': // '\003'
+						current.setStrikethrough(true);
+						break;
+					case 'm': // '\004'
+						current.setUnderlined(true);
+						break;
+					case 'i': // '\005'
+						current.setItalic(true);
+						break;
+					case 'r': // '\006'
+						color = 'f';
+						// fall through
 					default:
 						current = new TextComponent();
-						current.setColor(color);
+						current.setColor(ChatColor.getByChar(color));
 						current.setBold(Boolean.valueOf(forceBold > 0));
 						current.setItalic(Boolean.valueOf(forceItalic > 0));
 						current.setUnderlined(Boolean.valueOf(forceUnderlined > 0));
@@ -87,7 +81,6 @@ public class BBCodeChatParser implements ChatParser {
 						break;
 					}
 					parsed = true;
-				}
 			}
 			if(group_tag != null && nobbcodeLevel <= 0) {
 				if(group_tag.matches("(?is)^b$")) {

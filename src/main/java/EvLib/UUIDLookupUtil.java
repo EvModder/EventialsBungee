@@ -18,6 +18,7 @@ public class UUIDLookupUtil{
 		//TODO: Load cache
 	}
 
+	@SuppressWarnings("deprecation")
 	static public UUID lookupUUID(String name, boolean original){
 		try{
 			//TODO: return properly capitalized name as well as UUID
