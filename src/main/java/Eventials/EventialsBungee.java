@@ -1,6 +1,5 @@
 package Eventials;
 
-import java.awt.Color;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.lang.reflect.Field;
@@ -9,16 +8,13 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 import EvLib.EvBungeePlugin;
 import Eventials.commands.*;
 import Eventials.listeners.*;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ServerPing;
-import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.plugin.Command;
-import net.md_5.bungee.chat.ComponentSerializer;
 import net.md_5.bungee.config.Configuration;
 
 public class EventialsBungee extends EvBungeePlugin {
@@ -92,9 +88,7 @@ public class EventialsBungee extends EvBungeePlugin {
 					final String oldJson = sw.toString();
 					final String newJson = oldJson.substring(0, oldJson.lastIndexOf('}'))
 							+ ",\"enforcesSecureChat\":false,\"preventsChatReports\":true}";
-					//getLogger().warning("newJson: "+newJson.replaceAll("\"favicon\":\"[^\"]+\"", "\"favicon\":\"<trimmed>\""));
 					out.jsonValue(newJson);
-					//getLogger().info("done");
 				}
 				@Override public ServerPing read(JsonReader in) throws IOException{
 					return oldAdapter.read(in);
