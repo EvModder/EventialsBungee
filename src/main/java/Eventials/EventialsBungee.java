@@ -1,12 +1,24 @@
 package Eventials;
 
+import java.awt.Color;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonToken;
+import com.google.gson.stream.JsonWriter;
 import EvLib.EvBungeePlugin;
 import Eventials.commands.*;
 import Eventials.listeners.*;
 import net.md_5.bungee.api.CommandSender;
+import net.md_5.bungee.api.ServerPing;
+import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.plugin.Command;
+import net.md_5.bungee.chat.ComponentSerializer;
 import net.md_5.bungee.config.Configuration;
 
 public class EventialsBungee extends EvBungeePlugin {
@@ -64,6 +76,36 @@ public class EventialsBungee extends EvBungeePlugin {
 //					evt.getSuggestions().removeAll(hiddenTabAliases);
 //				}
 //			});
+		}
+
+		// Register NoChatReports custom field in ServerPing response
+		try{
+			final Field field = Class.forName("net.md_5.bungee.BungeeCord").getDeclaredField("gson");
+			field.setAccessible(true);
+			Gson oldGson = (Gson)field.get(getProxy());
+			TypeAdapter<ServerPing> oldAdapter = oldGson.getAdapter(ServerPing.class);
+			Gson newGson = oldGson.newBuilder().registerTypeAdapter(ServerPing.class, new TypeAdapter<ServerPing>(){
+				@Override public void write(JsonWriter out, ServerPing value) throws IOException{
+					//getLogger().info("writing with oldAdapter + injection");
+					StringWriter sw = new StringWriter();
+					oldAdapter.write(new JsonWriter(sw), value);
+					final String oldJson = sw.toString();
+					final String newJson = oldJson.substring(0, oldJson.lastIndexOf('}'))
+							+ ",\"enforcesSecureChat\":false,\"preventsChatReports\":true}";
+					//getLogger().warning("newJson: "+newJson.replaceAll("\"favicon\":\"[^\"]+\"", "\"favicon\":\"<trimmed>\""));
+					out.jsonValue(newJson);
+					//getLogger().info("done");
+				}
+				@Override public ServerPing read(JsonReader in) throws IOException{
+					return oldAdapter.read(in);
+				}
+				
+			}).create();
+			field.set(getProxy(), newGson);
+			getLogger().info("Registered injector for preventsChatReports in ping response");
+		}
+		catch(NoSuchFieldException | SecurityException | ClassNotFoundException | IllegalArgumentException | IllegalAccessException e){
+			e.printStackTrace();
 		}
 	}
 }
